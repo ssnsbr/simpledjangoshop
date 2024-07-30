@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "dj_rest_auth",
     "dj_rest_auth.registration",
     "products.apps.ProductsConfig",
+    "drf_spectacular",
     # "core.apps.CoreConfig",
     "core",
     "vendors",
@@ -79,6 +80,14 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
     ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "API Project",
+    "DESCRIPTION": "A sample to learn about DRF",
+    "VERSION": "1.0.0",
+    # OTHER SETTINGS
 }
 
 ROOT_URLCONF = "simple.urls"
