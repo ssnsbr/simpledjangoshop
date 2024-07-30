@@ -49,11 +49,12 @@ INSTALLED_APPS = [
     "corsheaders",
     "dj_rest_auth",
     "dj_rest_auth.registration",
-    "products.apps.ProductsConfig",
     "drf_spectacular",
     # "core.apps.CoreConfig",
     "core",
-    "vendors",
+    "vendors.apps.VendorsConfig",
+    "products.apps.ProductsConfig",
+
 ]
 CORS_ORIGIN_WHITELIST = (
     "http://localhost:3000",
@@ -82,7 +83,7 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
-
+# AUTH_USER_MODEL = "accounts.CustomUser"
 SPECTACULAR_SETTINGS = {
     "TITLE": "API Project",
     "DESCRIPTION": "A sample to learn about DRF",

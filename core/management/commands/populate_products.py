@@ -3,6 +3,7 @@ from faker import Faker
 from products.models import Product
 from vendors.models import Vendor, VendorProduct
 import random
+from django.contrib.auth import get_user_model
 
 # from users.models import User, Vendor, Category, ProductImage
 
@@ -12,6 +13,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         fake = Faker("fa_IR")  # Persian locale
+        # get_user_model().objects.all().delete()
+
         # VendorProduct.objects.all().delete()
         # Product.objects.all().delete()
         # Category.objects.all().delete()
@@ -37,8 +40,15 @@ class Command(BaseCommand):
             "فروشگاه ورزشی ج",
         ]
         vendors = []
+        
+        user = get_user_model().objects.create_user(
+        username="will2", email="will2@email.com", password="testpass123"
+        )
+        self.stdout.write(self.style.SUCCESS('Successfully add a User to the database.'))
+
         for name in vendor_names:
             vendor = Vendor.objects.create(
+                owner=user,
                 # id=Faker("uuid4"),
                 store_name=name,
                 store_address=fake.text(),
@@ -46,6 +56,8 @@ class Command(BaseCommand):
                 contact_number=fake.random_int(min=11111, max=31111),
             )
             vendors.append(vendor)
+        self.stdout.write(self.style.SUCCESS('Successfully populated the database with fake vendors'))
+
         products = []
         for name in product_names:
             product = Product.objects.create(
