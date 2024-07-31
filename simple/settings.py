@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     "core",
     "vendors.apps.VendorsConfig",
     "products.apps.ProductsConfig",
-
+    "accounts.apps.AccountsConfig",
 ]
 CORS_ORIGIN_WHITELIST = (
     "http://localhost:3000",
@@ -83,7 +83,8 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
-# AUTH_USER_MODEL = "accounts.CustomUser"
+
+AUTH_USER_MODEL = "accounts.CustomUser"
 SPECTACULAR_SETTINGS = {
     "TITLE": "API Project",
     "DESCRIPTION": "A sample to learn about DRF",
@@ -92,6 +93,12 @@ SPECTACULAR_SETTINGS = {
 }
 
 ROOT_URLCONF = "simple.urls"
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "home"
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 TEMPLATES = [
     {
