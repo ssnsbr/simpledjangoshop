@@ -1,6 +1,5 @@
 from django.db import models
 import uuid
-# from users.models import CustomUser
 from products.models import Product
 from simple import settings
 from django.contrib.auth import get_user_model
@@ -22,15 +21,22 @@ class Vendor(models.Model):
     def __str__(self):
         return self.store_name
 
+
 # VendorProduct model to handle the many-to-many relationship and additional details
 class VendorProduct(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='products')
-    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='vendor_products')
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="products"
+    )
+    vendor = models.ForeignKey(
+        Vendor, on_delete=models.CASCADE, related_name="vendor_products"
+    )
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    warehouse_quantity = models.PositiveIntegerField() # stocks
+    warehouse_quantity = models.PositiveIntegerField()  # stocks
     available = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return f"{self.vendor.store_name} - {self.product.name}"
 

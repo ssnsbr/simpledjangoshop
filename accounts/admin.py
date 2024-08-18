@@ -12,7 +12,6 @@ class CustomUserAdmin(UserAdmin):
     model = CustomUser
     list_display = [
         "email",
-        "username",
         "is_superuser",
     ]
 

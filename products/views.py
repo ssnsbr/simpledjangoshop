@@ -1,22 +1,34 @@
 from django.shortcuts import render
 from rest_framework import viewsets, generics
-
-# Create your views here.
-from django.views.generic import ListView, DetailView
-
 from products.permissions import IsAuthorOrReadOnly
-from .models import Product
-from .serializers import ProductSerializer, UserSerializer
+from .models import Product, ProductMedia
+from .serializers import ProductSerializer, ProductMediaListSerializer
 from rest_framework.permissions import IsAdminUser
 from django.contrib.auth import get_user_model
+from django.db.models import Q
+
 
 class ProductsViewsets(viewsets.ModelViewSet):  # read only
-    permission_classes = (IsAuthorOrReadOnly,)
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAdminUser]  # new
-    queryset = get_user_model().objects.all()
-    serializer_class = UserSerializer
+class ProductsMediaViewsets(viewsets.ModelViewSet):  # read only
+    queryset = ProductMedia.objects.all()
+    serializer_class = ProductMediaListSerializer
+
+    def get_queryset(self):
+        print(10 * "s")
+        pk = self.kwargs.get("pk", None)
+        res = ProductMedia.objects.filter(Q(product_id__exact=pk))
+        print("res", res)
+        res2 = self.queryset.filter(Q(product_id__exact=pk))
+        print("res2 0", res2[0].image)
+        return res
+
+    def get_object(self):
+        print(10 * "x")
+        pk = self.kwargs.get("pk", None)
+        res2 = self.queryset.filter(Q(product_id__exact=pk))
+        print("res2 0 ", res2[0])
+        return res2

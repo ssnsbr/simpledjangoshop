@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ProductsViewsets, UserViewSet
+from .views import ProductsMediaViewsets, ProductsViewsets
 
 from rest_framework.routers import SimpleRouter
 
@@ -9,6 +9,7 @@ from rest_framework.routers import SimpleRouter
 #     path("<uuid:pk>/", ProductDetail.as_view(), name="product_detail"),
 # ]
 router = SimpleRouter()
-router.register("users", UserViewSet, basename="users")
 router.register("", ProductsViewsets, basename="products")
+router.register("media", ProductsMediaViewsets, basename="products-media")
+
 urlpatterns = router.urls

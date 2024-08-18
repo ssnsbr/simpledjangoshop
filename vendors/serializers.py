@@ -19,3 +19,8 @@ class VendorProductSerializer(serializers.ModelSerializer):
         model = VendorProduct
         # fields =
         fields = "__all__"
+
+
+class VendorProductListSerializer(serializers.ListSerializer):
+    child=VendorProductSerializer()
+

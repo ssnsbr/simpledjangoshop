@@ -25,8 +25,9 @@ from drf_spectacular.views import (
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/products/", include("products.urls")),
-    path("api/vendors/", include("vendors.urls")),
+    path("api/cart/", include("cart.urls")),
+    path("api/product/", include("products.urls")),
+    path("api/", include("vendors.urls")),
     # path("accounts/", include("django.contrib.auth.urls")), 
     path("api/dj-rest-auth/", include("dj_rest_auth.urls")),
     path(

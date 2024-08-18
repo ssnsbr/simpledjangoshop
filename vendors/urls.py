@@ -10,9 +10,19 @@ from .views import VendorProductViewSets, VendorViewsets
 # ]
 router = SimpleRouter()
 router.register("", VendorViewsets, basename="vendors")
-vendor_router = SimpleRouter()
-vendor_router.register("products", VendorProductViewSets, basename="products")
+
+vendorproducts_router = SimpleRouter()
+vendorproducts_router.register(
+    "", VendorProductViewSets, basename="vendorproducts"
+)
+
+# vendor_router = SimpleRouter()
+# vendor_router.register("products", VendorProductViewSets, basename="products")
+
 urlpatterns = [
-    path("", include(router.urls)),
-    path("<int:pk>/", include(vendor_router.urls)),
+    path("vendors/", include(router.urls)),
+    path("vendorproducts/", include(vendorproducts_router.urls)),
+    # path("vendorproducts/<str:pk>/", VendorProductViewSets.as_view()),
+    # path("a/<int:pk>/", include(vendorproducts_router.urls)),
+    # path("<int:pk>/", include(vendor_router.urls)),
 ]
