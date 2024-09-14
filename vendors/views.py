@@ -120,10 +120,10 @@ class VendorProductViewSets(viewsets.ModelViewSet):  # read only
 class VendorRatingViewsets(viewsets.ModelViewSet):  # read only
     # permission_classes = (IsOwnerOrReadOnly,)
     queryset = VendorRating.objects.all()
-    serializer_class = VendorRatingListSerializer
+    serializer_class = VendorRatingSerializer
 
 
 class VendorTransactionViewsets(viewsets.ModelViewSet):  # read only
     # permission_classes = (IsOwnerOrReadOnly,)
     queryset = VendorTransaction.objects.all()
-    serializer_class = VendorTransactionListSerializer
+    serializer_class = VendorTransactionSerializer

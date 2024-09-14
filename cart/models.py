@@ -1,3 +1,4 @@
+from decimal import Decimal
 import uuid
 from django.db import models
 
@@ -15,6 +16,25 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"Cart of {self.user.username}"
+
+    def __len__(self):
+        """
+        count all items in the cart.
+        :return:
+        """
+        all_cart_items = self.items.all()
+        return sum(item.quantity for item in all_cart_items)
+
+    def get_items(self):
+        return self.items.all()
+
+    def get_total_price(self):
+        all_cart_items = self.items.all()
+        return sum(item.vendor_product.price * item.quantity for item in all_cart_items)
+
+    def clear(self):
+        # remove cart(table) from session
+        pass
 
 
 # CartItem model to handle individual items within a cart

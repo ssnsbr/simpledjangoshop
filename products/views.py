@@ -4,7 +4,7 @@ from products.permissions import IsAuthorOrReadOnly
 from vendors.models import VendorProduct
 from vendors.serializers import VendorProductSerializer
 from .models import Product, ProductMedia
-from .serializers import ProductSerializer, ProductMediaListSerializer
+from .serializers import ProductMediaSerialiser, ProductSerializer, ProductMediaListSerializer
 from rest_framework.permissions import IsAdminUser
 from django.contrib.auth import get_user_model
 from django.db.models import Q
@@ -17,7 +17,7 @@ class ProductsViewsets(viewsets.ModelViewSet):  # read only
 
 class ProductsMediaViewsets(viewsets.ModelViewSet):  # read only
     queryset = ProductMedia.objects.all()
-    serializer_class = ProductMediaListSerializer
+    serializer_class = ProductMediaSerialiser
 
     def get_queryset(self):
         print(10 * "s")

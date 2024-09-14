@@ -4,6 +4,9 @@ from products.serializers import ProductMediaSerialiser
 from .models import Vendor, VendorProduct, VendorRating, VendorTransaction
 
 # fields = '__all__'
+from drf_spectacular.utils import (
+    extend_schema_field,
+)
 
 
 class VendorSerializer(serializers.ModelSerializer):
@@ -32,11 +35,11 @@ class VendorProductSerializer(serializers.ModelSerializer):
         data = ProductMediaSerialiser(obj.product.first_image()).data
         return data
 
+    @extend_schema_field(serializers.CharField)
     def get_vendor_name(self, obj):
-        # print("vendor_name: obj:",obj)
-        # data = VendorSerializer(obj.store_name()).data
         return obj.vendor.store_name
 
+    @extend_schema_field(serializers.CharField)
     def get_product_name(self, obj):
         # print("vendor_name: obj:",obj)
         # data = VendorSerializer(obj.store_name()).data
@@ -56,6 +59,7 @@ class VendorProductListSerializer(serializers.ListSerializer):
 class VendorRatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = VendorRating
+        fields = "__all__"
 
 
 class VendorRatingListSerializer(serializers.ListSerializer):
@@ -65,6 +69,7 @@ class VendorRatingListSerializer(serializers.ListSerializer):
 class VendorTransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = VendorTransaction
+        fields = "__all__"
 
 
 class VendorTransactionListSerializer(serializers.ListSerializer):

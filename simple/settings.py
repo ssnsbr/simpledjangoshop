@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     "products.apps.ProductsConfig",
     "accounts.apps.AccountsConfig",
     "order.apps.OrderConfig",
+    "payment.apps.PaymentConfig",
 ]
 LOG_PATH = os.path.join(BASE_DIR, "log/")
 

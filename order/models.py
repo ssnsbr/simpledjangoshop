@@ -2,7 +2,7 @@ import uuid
 from django.db import models
 from django.contrib.auth import get_user_model
 
-from vendors.models import VendorProduct
+from vendors.models import Vendor, VendorProduct
 
 CustomUser = get_user_model()
 
@@ -10,16 +10,22 @@ CustomUser = get_user_model()
 # Create your models here.
 class Order(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='orders')
-
+    user = models.ForeignKey(
+        get_user_model(), on_delete=models.CASCADE, related_name="orders"
+    )
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    address = models.CharField(max_length=250)
+
+    address = models.CharField(max_length=250)  # TODO
     city = models.CharField(max_length=100)
 
     paid = models.BooleanField(default=False)
+
+    provider = models.ForeignKey(
+        Vendor, on_delete=models.CASCADE, related_name="vendor_provider"
+    )
 
     class Meta:
         ordering = ("-created_at",)
@@ -33,12 +39,14 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
-    
-    item = models.ForeignKey(VendorProduct, related_name="order_items",on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="items")
+
+    item = models.ForeignKey(
+        VendorProduct, related_name="order_items", on_delete=models.CASCADE
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
+
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)
 
@@ -47,14 +55,15 @@ class OrderItem(models.Model):
 
     def get_cost(self):
         return self.price * self.quantity
-    
+
     def vendor(self):
         return self.item.vendor
-    
-    
+
 
 class OrderTracking(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    order = models.OneToOneField(Order, on_delete=models.CASCADE, related_name='tracking')
+    order = models.OneToOneField(
+        Order, on_delete=models.CASCADE, related_name="tracking"
+    )
     status = models.CharField(max_length=255)
-    updated_at   = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)

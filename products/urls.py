@@ -12,7 +12,7 @@ router = SimpleRouter()
 router.register("", ProductsViewsets, basename="products")
 
 # router.register("<uuid:pk>/vp", ProductVendorsViewsets, basename="vp")
-router.register("media", ProductsMediaViewsets, basename="products-media")
+router.register("<uuid:pk>/media", ProductsMediaViewsets, basename="products-media")
 
 # router.register("", ProductsViewsets, basename="products")
 

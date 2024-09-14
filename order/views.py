@@ -34,44 +34,54 @@ class CreateOrderFromCartView(viewsets.ModelViewSet):
         with transaction.atomic():  # Ensure that the whole order creation is atomic
 
             order = Order.objects.get_or_create(user=self.user(), total_price=0)
-
+            vendors_list = []
+            orders_list = []
             for cart_item in cart.get_items():
-                vendor_product = cart_item.vendor_product
+                vendors_list.append(cart_item.vendor_product.vendor)
+            vendors_list = list(set(vendors_list))
+            for vendor in vendors_list:
+                for cart_item in cart.get_items():
+                    if cart_item.vendor_product.vendor == vendor:
+                        vendor_product = cart_item.vendor_product
 
-                # Check if enough stock is available
-                if vendor_product.warehouse_quantity < cart_item.quantity:
-                    return Response(
-                        {"error": f"Not enough stock for {vendor_product.name}"},
-                        status=status.HTTP_400_BAD_REQUEST,
-                    )
+                        # Check if enough stock is available
+                        if vendor_product.warehouse_quantity < cart_item.quantity:
+                            return Response(
+                                {
+                                    "error": f"Not enough stock for {vendor_product.name}"
+                                },
+                                status=status.HTTP_400_BAD_REQUEST,
+                            )
 
-                # Create order items
-                order_item = OrderItem.objects.create(
-                    order=order,
-                    item=vendor_product,
-                    quantity=cart_item.quantity,
-                    price=vendor_product.price,
-                )
+                        # Create order items
+                        order_item = OrderItem.objects.create(
+                            vendor=vendor_product.vendor,
+                            order=order,
+                            item=vendor_product,
+                            quantity=cart_item.quantity,
+                            price=vendor_product.price,
+                        )
 
-                # Update the stock of the product
-                vendor_product.warehouse_quantity -= cart_item.quantity
-                vendor_product.save()
+                        # Update the stock of the product
+                        vendor_product.warehouse_quantity -= cart_item.quantity
+                        vendor_product.save()
 
-                # Calculate total amount
-                total_amount += vendor_product.price * cart_item.quantity
+                        # Calculate total amount
+                        total_amount += vendor_product.price * cart_item.quantity
 
             # Set the total amount of the order
             order.total_price = total_amount
             order.save()
+            orders_list.append(order)
 
             # Clear the cart after order is placed
             cart.items.all().delete()
-        return order
+        return orders_list
 
     def post(self, request):
-        order = self.create_order()
+        orders_list = self.create_order()
         # Return the order details
-        serializer = OrderSerializer(order)
+        serializer = OrderSerializer(orders_list)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 

@@ -6,6 +6,7 @@ from .views import *
 router = SimpleRouter()
 router.register("", VendorViewsets, basename="vendors")
 
+
 vendor_products_router = SimpleRouter()
 vendor_products_router.register("products", VendorProductViewSets, basename="vendors")
 
@@ -27,7 +28,7 @@ urlpatterns = [
     #     path("<uuid:pk>/", VendorViewSet.as_view(), name="vendor_detail"),
     #     path("product/<uuid:pk>/", VendorProductViewSet.as_view(), name="vendor_product_detail"),
     #     path("", VendorProductViewSet.as_view(), name="vendor_product_list"),
-    path("<str:pk>/", include(vendor_products_router.urls)),
-    path("<str:pk>/", include(vendor_rating_router.urls)),
-    path("<str:pk>/", include(vendor_transaction_router.urls)),
+    path("<uuid:pk>/", include(vendor_products_router.urls), name="vendor_products"),
+    path("<uuid:pk>/", include(vendor_rating_router.urls),name="vendor_rating"),
+    path("<uuid:pk>/", include(vendor_transaction_router.urls),name="vendor_transaction"),
 ]
