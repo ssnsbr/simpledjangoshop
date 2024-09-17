@@ -39,12 +39,18 @@ class VendorViewsets(viewsets.ModelViewSet):  # read only
 
 
 class VendorProductViewSets(viewsets.ModelViewSet):  # read only
-    # permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (IsOwnerOrReadOnly,)
     queryset = VendorProduct.objects.all()
     serializer_class = VendorProductSerializer
+
     # def get_object(self):
     #     print("jo")
     #     return super().get_object()
+    def update(self, request, *args, **kwargs):
+        print("Update:",100*"**")
+        su = super().update(request, *args, **kwargs)
+        print("SU:",su)
+        return su
 
     def get_queryset(self):
         print("get_queryset")
@@ -66,9 +72,15 @@ class VendorProductViewSets(viewsets.ModelViewSet):  # read only
             return VendorProduct.objects.all()
 
     def get_object(self):
+        
+        
         print(10 * "x")
+        print(self.kwargs)
         pk = self.kwargs.get("pk", None)
-        return self.queryset.filter(Q(vendor_id__exact=pk))
+        print(pk)
+        qs=self.queryset.filter(Q(id__exact=pk))
+        print(qs)
+        return qs[0]
 
     # http_method_names = ["get"] or ReadOnlyModelViewSet
 
