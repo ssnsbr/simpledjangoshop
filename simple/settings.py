@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+from .logging_config import LOGGING
+
 from datetime import timedelta
 import os
 from pathlib import Path
@@ -63,6 +65,7 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "order.apps.OrderConfig",
     "payment.apps.PaymentConfig",
+    "search.apps.SearchConfig",
 ]
 LOG_PATH = os.path.join(BASE_DIR, "log/")
 
@@ -98,11 +101,16 @@ MIDDLEWARE = [
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+MEDIA_URL = "/media/"
+
+
 # STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.AllowAny",
+        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
