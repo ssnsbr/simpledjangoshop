@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         images_list = glob.glob(
-            path.join(ROOT_DIR, "static\\img\\saloerphotos\\saloerplaceholders\\*.png")
+            path.join(ROOT_DIR, "media\\img\\saloerphotos\\saloerplaceholders\\*.png")
         )
         images_list = [x[len(ROOT_DIR) :] for x in images_list]
         print(images_list)

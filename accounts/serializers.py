@@ -8,3 +8,10 @@ class UserSerializer(serializers.ModelSerializer):
         fields = (
             "email",
         )
+
+
+class UserAddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.UserAddress
+        fields = "__all__"
+

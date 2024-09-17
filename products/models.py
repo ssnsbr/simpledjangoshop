@@ -39,6 +39,7 @@ class Product(models.Model):
 
 
 class ProductMedia(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     product = models.ForeignKey(
         Product,
         related_name="media",
