@@ -16,6 +16,14 @@ class Vendor(models.Model):
     contact_number = models.CharField(max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    average_rating = models.DecimalField(max_digits=3, decimal_places=2, default=0.00)
+
+    def update_average_rating(self):
+        ratings = self.ratings.all()
+        if ratings.exists():
+            avg_rating = ratings.aggregate(models.Avg("rating"))["rating__avg"]
+            self.average_rating = round(avg_rating, 2)
+            self.save()
 
     def __str__(self):
         return self.store_name
@@ -24,6 +32,21 @@ class Vendor(models.Model):
         products = self.vendor_products.all()  # .store_name
         # print("store_name:", products)
         return products
+
+    def get_sales_report(self):
+        sales = self.transactions.aggregate(total_sales=models.Sum("amount"))
+        return sales["total_sales"] if sales["total_sales"] else 0
+
+
+class VendorProfile(models.Model):
+    vendor = models.OneToOneField(
+        Vendor, on_delete=models.CASCADE, related_name="profile"
+    )
+    contact_number = models.CharField(max_length=20)
+    social_links = models.JSONField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.vendor.store_name} - Profile"
 
 
 # VendorProduct model to handle the many-to-many relationship and additional details
@@ -41,11 +64,25 @@ class VendorProduct(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def save(self, *args, **kwargs):
+        if self.warehouse_quantity == 0:
+            self.available = False
+        else:
+            self.available = True
+        super(VendorProduct, self).save(*args, **kwargs)
+
     class Meta:
-        # unique_together = ('vendor', 'product',)  
+        # unique_together = ('vendor', 'product',)
         constraints = [
-            models.UniqueConstraint(fields=['vendor', 'product'], name='vendor product constraint')
+            models.UniqueConstraint(
+                fields=["vendor", "product"], name="vendor product constraint"
+            )
         ]
+        indexes = [
+            models.Index(fields=["vendor", "product"]),
+            models.Index(fields=["available"]),
+        ]
+
     def __str__(self):
         return f"{self.vendor.store_name} - {self.product.name}"
 
