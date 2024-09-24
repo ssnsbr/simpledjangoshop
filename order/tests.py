@@ -6,11 +6,16 @@ from order.models import Order, OrderItem, ShippingMethod, UserAddress
 
 CustomUser = get_user_model()
 
-#UnauthorizedUser  User Owner  Vendor  Admin 
+# UnauthorizedUser  User Owner  Vendor  Admin
 #               UU  US   VN   AD
-#CreateOrder    N   Y    N   N
+# CreateOrder    N   Y    N   N
 #
-
+#  test_order_creation_from_cart """Test if an order is created successfully from cart items"""
+#  test_order_split_by_vendor """Test if orders are split by vendor"""
+#  test_cart_items_removed_after_order """Test that cart items are removed after order creation"""
+#  test_insufficient_stock_prevents_order """Test that an order is prevented if there is not enough stock"""
+#  test_order_cancellation """Test if the order can be canceled and items returned to cart"""
+#  test_shipping_method_applied """Test that the selected shipping method is applied to the order"""
 
 
 class OrderAppTests(TestCase):

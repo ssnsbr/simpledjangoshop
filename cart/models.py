@@ -2,7 +2,6 @@ from decimal import Decimal
 import uuid
 from django.db import models
 
-from accounts.models import CustomUser
 from products.models import Product
 from vendors.models import VendorProduct
 from django.contrib.auth import get_user_model

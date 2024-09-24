@@ -3,12 +3,19 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from vendors.models import Vendor
 from products.models import Product
+from django.contrib.auth import get_user_model
 
 class UnauthenticatedUserTests(APITestCase):
 
     def setUp(self):
         # Create a vendor and product for testing
-        self.vendor = Vendor.objects.create(name="Test Vendor")
+        self.vendoruser = get_user_model().objects.create_user(
+            username="testuservendor", password="password"
+        )
+
+        self.vendor = Vendor.objects.create(owner=self.vendoruser, store_name="Test Vendor")
+       
+        self.vendor = Vendor.objects.create(store_name="Test Vendor")
         self.product = Product.objects.create(name="Test Product", price=50.00)
 
     def test_unauthenticated_user_can_view_product_details(self):

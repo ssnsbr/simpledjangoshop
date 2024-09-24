@@ -119,7 +119,7 @@ class VendorProductViewSetTestCase(APITestCase):
             ),
             payload,
         )
-        print(response.content, response.status_code)
+        # print(response.content, response.status_code)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(VendorProduct.objects.count(), 2)
         self.assertEqual(VendorProduct.objects.latest("id").price, 20.00)

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Payment
+from .models import UserPayment,VendorPayment
 from django.contrib.auth import get_user_model
 
 # fields = '__all__'
@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-class PaymentSerializer(serializers.ModelSerializer):
+class UserPaymentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Payment
+        model = UserPayment
         fields = "__all__"

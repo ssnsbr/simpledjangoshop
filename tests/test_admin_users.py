@@ -12,7 +12,11 @@ class AdminUserTests(APITestCase):
         # Create admin user, vendor, and product
         self.admin_user = CustomUser.objects.create_superuser(username="admin", password="adminpassword")
         self.client.login(username="admin", password="adminpassword")
-        self.vendor = Vendor.objects.create(name="Test Vendor")
+        self.vendoruser = get_user_model().objects.create_user(
+            username="testuservendor", password="password"
+        )
+        self.vendor = Vendor.objects.create(owner=self.vendoruser, store_name="Test Vendor")
+       
         self.product = VendorProduct.objects.create(
             name="Test Product", price=100.00, warehouse_quantity=50, vendor=self.vendor
         )

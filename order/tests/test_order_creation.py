@@ -10,7 +10,12 @@ class OrderCreationTests(TestCase):
     def setUp(self):
         # Set up common data
         self.user = CustomUser.objects.create(username="testuser")
-        self.vendor = Vendor.objects.create(name="Vendor A")
+        self.vendoruser = get_user_model().objects.create_user(
+            username="testuservendor", password="password"
+        )
+
+        self.vendor = Vendor.objects.create(owner=self.vendoruser, store_name="Vendor A")
+       
         self.vendor_product = VendorProduct.objects.create(
             vendor=self.vendor, name="Product A", price=50.00, warehouse_quantity=100
         )

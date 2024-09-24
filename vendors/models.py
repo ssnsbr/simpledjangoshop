@@ -1,6 +1,6 @@
 from django.db import models
 import uuid
-from products.models import Product
+from products.models import Product, validate_image
 from simple import settings
 from django.contrib.auth import get_user_model
 
@@ -38,6 +38,22 @@ class Vendor(models.Model):
         return sales["total_sales"] if sales["total_sales"] else 0
 
 
+class VendorDiscount(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True)
+    description = models.TextField()
+    discount_percentage = models.DecimalField(max_digits=10, decimal_places=2)
+    available = models.BooleanField(default=False)
+    logo = models.ImageField(
+        upload_to="products", validators=[validate_image], blank=True, null=True
+    )
+
+    def __str__(self):
+        return f"{self.vendor.name} - {self.discount_percentage}"
+
+
 class VendorProfile(models.Model):
     vendor = models.OneToOneField(
         Vendor, on_delete=models.CASCADE, related_name="profile"
@@ -60,6 +76,10 @@ class VendorProduct(models.Model):
     )
     price = models.DecimalField(max_digits=10, decimal_places=2)
     warehouse_quantity = models.PositiveIntegerField()  # stocks
+    discount = models.ForeignKey(
+        VendorDiscount, null=True, on_delete=models.CASCADE, related_name="discount"
+    )
+
     available = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

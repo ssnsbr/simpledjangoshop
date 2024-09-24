@@ -1,5 +1,6 @@
 from django.contrib import admin
 
-from .models import Payment
+from .models import VendorPayment,UserPayment
 
-admin.site.register(Payment)
+admin.site.register(VendorPayment)
+admin.site.register(UserPayment)

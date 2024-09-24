@@ -1,11 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 from rest_framework import viewsets
 
 from .models import Vendor, VendorProduct, VendorTransaction
 from .serializers import *
 from rest_framework import viewsets, generics
-from .permissions import IsOwnerOrReadOnly
+from .permissions import IsOwnerOrReadOnly, IsVendorOwner
 from rest_framework.decorators import action
 from rest_framework import renderers
 from django.db.models import Q
@@ -39,7 +39,7 @@ class VendorViewsets(viewsets.ModelViewSet):  # read only
 
 
 class VendorProductViewSets(viewsets.ModelViewSet):  # read only
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = [IsOwnerOrReadOnly, IsVendorOwner]
     queryset = VendorProduct.objects.all()
     serializer_class = VendorProductSerializer
 
@@ -47,9 +47,12 @@ class VendorProductViewSets(viewsets.ModelViewSet):  # read only
     #     print("jo")
     #     return super().get_object()
     def update(self, request, *args, **kwargs):
-        print("Update:",100*"**")
+        print("Update:", 10 * "**")
+        obj = get_object_or_404(self.get_queryset(), pk=self.kwargs["vendor_pk"])
+
+        self.check_object_permissions(self.request, obj)
         su = super().update(request, *args, **kwargs)
-        print("SU:",su)
+        print("SU:", su)
         return su
 
     def get_queryset(self):
@@ -72,14 +75,8 @@ class VendorProductViewSets(viewsets.ModelViewSet):  # read only
             return VendorProduct.objects.all()
 
     def get_object(self):
-        
-        
-        print(10 * "x")
-        print(self.kwargs)
         pk = self.kwargs.get("pk", None)
-        print(pk)
-        qs=self.queryset.filter(Q(id__exact=pk))
-        print(qs)
+        qs = self.queryset.filter(Q(id__exact=pk))
         return qs[0]
 
     # http_method_names = ["get"] or ReadOnlyModelViewSet
