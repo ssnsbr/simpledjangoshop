@@ -1,0 +1,111 @@
+{
+  "Main_Categories": [
+    {
+      "fa": "ورزش",
+      "en": "Sport",
+      "parent": ""
+    },
+    {
+      "fa": "کمپ و سفر",
+      "en": "Camping and Traveling",
+      "parent": ""
+    },
+    {
+      "fa": "یوگا، پیلاتس و مدیتیشن",
+      "en": "Yoga, Pilates and Meditaion",
+      "parent": ""
+    }
+  ],
+  "Categories": [
+    {
+      "fa": "پوشاک ورزشی",
+      "en": "Sport-wear",
+      "parent": "Sport"
+    },
+    {
+      "fa": "کفش ورزشی",
+      "en": "Sport-Footwear",
+      "parent": "Sport"
+    },
+    {
+      "fa": "تجهیزات حفاظتی",
+      "en": "Protective-Gear",
+      "parent": "Sport"
+    },
+    {
+      "fa": "لوازم تمرینی",
+      "en": "Training-Equipment",
+      "parent": "Sport"
+    },
+    {
+      "fa": "توپ‌های ورزشی",
+      "en": "Sport-Balls",
+      "parent": "Sport"
+    },
+    {
+      "fa": "لوازم جانبی",
+      "en": "Accessories",
+      "parent": "Sport"
+    },
+    {
+      "fa": "دستگاه‌های ورزشی",
+      "en": "Exercise-Machines",
+      "parent": "Sport"
+    },
+    {
+      "fa": "نوشیدنی و مکمل‌های ورزشی",
+      "en": "Sport-Drinks-and-Supplements",
+      "parent": "Sport"
+    }
+  ],
+  "Sub_categories": [
+    {
+      "fa": ["تردمیل", "دوچرخه ثابت", "دستگاه وزنه"],
+      "en": ["Treadmills", "Stationary Bikes", "Weight Machines"],
+      "parent": ["Exercise-Machines", "Exercise-Machines", "Exercise-Machines"]
+    },
+    {
+      "fa": ["ساک ورزشی", "کلاه و عینک", "کمربند"],
+      "en": ["Gym Bags", "Hats and Sunglasses", "Belts"],
+      "parent": ["Accessories", "Accessories", "Accessories"]
+    },
+    {
+      "fa": ["توپ فوتبال", "توپ بسکتبال", "توپ تنیس"],
+      "en": ["Football", "Basketball", "Tennis Ball"],
+      "parent": ["Sport-Balls", "Sport-Balls", "Sport-Balls"]
+    },
+    {
+      "fa": ["دمبل", "کش ورزشی", "زیرانداز"],
+      "en": ["Dumbbells", "Resistance Bands", "Yoga Mats"],
+      "parent": [
+        "Training-Equipment",
+        "Training-Equipment",
+        "Training-Equipment"
+      ]
+    },
+    {
+      "fa": ["کلاه ایمنی", "زانو بند", "سینه بند"],
+      "en": ["Helmets", "Knee Pads", "Chest Protectors"],
+      "parent": ["Protective-Gear", "Protective-Gear", "Protective-Gear"]
+    },
+    {
+      "fa": ["کفش فوتبال", "کفش دو", "کفش بسکتبال"],
+      "en": ["Football Shoes", "Running Shoes", "Basketball Shoes"],
+      "parent": ["Sport-Footwear", "Sport-Footwear", "Sport-Footwear"]
+    },
+    {
+      "fa": ["لباس تکواندو", "لباس فوتبال", "لباس دو"],
+      "en": ["Taekwondo Uniforms", "Football Kits", "Running Gear"],
+      "parent": ["Sport-wear", "Sport-wear", "Sport-wear"]
+    },
+    {
+      "fa": ["پودر پروتئین", "نوشیدنی انرژی زا", "مکمل‌های ویتامین"],
+      "en": ["Protein Powder", "Energy Drinks", "Vitamin Supplements"],
+      "parent": [
+        "Sport-Drinks-and-Supplements",
+        "Sport-Drinks-and-Supplements",
+        "Sport-Drinks-and-Supplements"
+      ]
+    }
+  ]
+}

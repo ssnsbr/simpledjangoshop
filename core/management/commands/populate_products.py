@@ -43,6 +43,15 @@ vendor_bios = [
 class Command(BaseCommand):
     help = "Populate the database with fake products and related data"
 
+    def populate_categories(self):
+        self.categories = []
+        for i, cat_name in enumerate(category_names):
+            self.categories.append(
+                Category.objects.create(
+                    name=cat_name, description=cat_name, slug=cat_slugs[i]
+                )
+            )
+
     def handle(self, *args, **kwargs):
         images_list = glob.glob(
             path.join(ROOT_DIR, "static\\img\\saloerphotos\\saloerplaceholders\\*.png")
@@ -158,5 +167,5 @@ class Command(BaseCommand):
                         available=True,
                     )
             self.stdout.write(
-            self.style.SUCCESS(f"Successfully added  ${cat} to the database.")
-        )
+                self.style.SUCCESS(f"Successfully added  ${cat} to the database.")
+            )

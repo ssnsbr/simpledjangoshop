@@ -2,7 +2,9 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 from products.models import Product, ProductMedia
-from vendors.models import Vendor, VendorProduct
+
+from vendor_products.models import VendorProduct
+from vendors.models import Vendor
 from django.contrib.auth import get_user_model
 
 CustomUser = get_user_model()

@@ -1,9 +1,8 @@
 from django.contrib import admin
+from .models import Vendor, VendorTransaction,VendorDiscount,VendorRating
 
-# Register your models here.
 
-from .models import Vendor, VendorProduct, VendorTransaction
-
+admin.site.register(VendorDiscount) 
+admin.site.register(VendorRating)
 admin.site.register(Vendor)
-admin.site.register(VendorProduct)
 admin.site.register(VendorTransaction)

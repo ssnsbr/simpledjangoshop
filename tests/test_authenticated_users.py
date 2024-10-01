@@ -3,7 +3,8 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from order.models import Order
 from products.models import Product
-from vendors.models import Vendor, VendorProduct
+from vendor_products.models import VendorProduct
+from vendors.models import Vendor
 from django.contrib.auth import get_user_model
 
 CustomUser = get_user_model()

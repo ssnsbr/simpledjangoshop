@@ -3,8 +3,9 @@ import uuid
 from django.db import models
 
 from products.models import Product
-from vendors.models import VendorProduct
 from django.contrib.auth import get_user_model
+
+from vendor_products.models import VendorProduct
 
 
 # Cart model to handle user's shopping cart

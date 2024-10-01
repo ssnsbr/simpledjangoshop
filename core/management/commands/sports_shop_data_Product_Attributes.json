@@ -1,0 +1,126 @@
+{
+  "Product_Attributes": {
+    "لباس ورزشی": {
+      "fa": {
+        "سایز": ["XS", "S", "M", "L", "XL", "XXL"],
+        "جنس": ["نخ", "پلی‌استر", "ترکیبی", "پنبه", "نایلون"],
+        "وزن": ["سبک", "متوسط", "سنگین"],
+        "رنگ": ["سفید", "مشکی", "آبی", "قرمز", "سبز", "زرد"],
+        "آستین": ["کوتاه", "بلند", "نیمه بلند"],
+        "برند": ["آدیداس", "نایک", "پوما", "فیلپ کات", "لیوایز"],
+        "نوع طراحی": ["مدرن", "کلاسیک", "گرافیکی"]
+      },
+      "en": {
+        "size": ["XS", "S", "M", "L", "XL", "XXL"],
+        "material": ["Cotton", "Polyester", "Blend", "Nylon"],
+        "weight": ["Light", "Medium", "Heavy"],
+        "color": ["White", "Black", "Blue", "Red", "Green", "Yellow"],
+        "sleeve": ["Short", "Long", "Half-length"],
+        "brand": ["Adidas", "Nike", "Puma", "Fila", "Levi's"],
+        "design_type": ["Modern", "Classic", "Graphic"]
+      }
+    },
+    "تجهیزات حفاظتی": {
+      "fa": {
+        "سایز": ["XS", "S", "M", "L", "XL"],
+        "نوع": ["محافظ سر", "محافظ سینه", "محافظ ساق پا", "محافظ آرنج"],
+        "جنس": ["فوم", "پلاستیک", "چرم مصنوعی", "سلیکون"],
+        "رنگ": ["قرمز", "آبی", "سفید", "مشکی", "نقره‌ای"],
+        "برند": ["نایک", "پوما", "راد", "اسپیدو"],
+        "نوع گواهی": ["CE", "ISO"]
+      },
+      "en": {
+        "size": ["XS", "S", "M", "L", "XL"],
+        "type": ["Headgear", "Chest Protector", "Shin Guard", "Elbow Protector"],
+        "material": ["Foam", "Plastic", "Synthetic Leather", "Silicone"],
+        "color": ["Red", "Blue", "White", "Black", "Silver"],
+        "brand": ["Nike", "Puma", "Rad", "Speedo"],
+        "certification": ["CE", "ISO"]
+      }
+    },
+    "کفش ورزشی": {
+      "fa": {
+        "سایز": [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46],
+        "نوع": ["کفش تمرینی", "کفش دویدن", "کفش بسکتبال", "کفش فوتبال"],
+        "جنس": ["چرم", "پلاستیک", "مش", "نایلون"],
+        "رنگ": ["سفید", "مشکی", "قرمز", "آبی", "طوسی"],
+        "برند": ["آدیداس", "نایک", "پوما", "کونورس"],
+        "نوع کفی": ["کفی نرم", "کفی سخت"]
+      },
+      "en": {
+        "size": [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46],
+        "type": ["Training Shoes", "Running Shoes", "Basketball Shoes", "Soccer Cleats"],
+        "material": ["Leather", "Plastic", "Mesh", "Nylon"],
+        "color": ["White", "Black", "Red", "Blue", "Gray"],
+        "brand": ["Adidas", "Nike", "Puma", "Converse"],
+        "sole_type": ["Soft Sole", "Hard Sole"]
+      }
+    },
+    "تجهیزات جانبی": {
+      "fa": {
+        "نوع": ["کیف", "هدبند", "مچ‌بند", "کلاه", "چند کاره"],
+        "جنس": ["نخ", "پلی‌استر", "چرم", "نایلون"],
+        "رنگ": ["سیاه", "قرمز", "سفید", "آبی", "زرد"],
+        "برند": ["نایک", "آدیداس", "پوما", "ویکتور"],
+        "نوع کاربرد": ["ورزشی", "روزمره"]
+      },
+      "en": {
+        "type": ["Bag", "Headband", "Wristband", "Cap", "Multi-functional"],
+        "material": ["Cotton", "Polyester", "Leather", "Nylon"],
+        "color": ["Black", "Red", "White", "Blue", "Yellow"],
+        "brand": ["Nike", "Adidas", "Puma", "Victor"],
+        "usage_type": ["Sport", "Casual"]
+      }
+    },
+    "لوازم تمرینی": {
+      "fa": {
+        "نوع": ["پد ضربه", "دستکش بوکس", "کیسه بوکس", "کش تمرینی"],
+        "جنس": ["فوم", "چرم مصنوعی", "پلی‌استر"],
+        "رنگ": ["قرمز", "آبی", "مشکی", "سبز"],
+        "برند": ["آدیداس", "پوما", "شوریکو"],
+        "قدرت مقاومت": ["قوی", "متوسط", "ضعیف"]
+      },
+      "en": {
+        "type": ["Punch Pads", "Boxing Gloves", "Punching Bag", "Resistance Bands"],
+        "material": ["Foam", "Synthetic Leather", "Polyester"],
+        "color": ["Red", "Blue", "Black", "Green"],
+        "brand": ["Adidas", "Puma", "Shuriko"],
+        "resistance_strength": ["Strong", "Medium", "Weak"]
+      }
+    },
+    "توپ‌های ورزشی": {
+      "fa": {
+        "نوع": ["فوتبال", "والیبال", "بسکتبال", "هندبال"],
+        "جنس": ["چرم مصنوعی", "پلاستیک", "نایلون"],
+        "سایز": ["استاندارد", "کوچک", "بزرگ"],
+        "رنگ": ["سفید", "مشکی", "قرمز", "آبی", "نقره‌ای"],
+        "برند": ["نایک", "پوما", "مولتن", "واگنر"],
+        "نوع دوخت": ["دست‌دوز", "ماشینی"]
+      },
+      "en": {
+        "type": ["Football", "Volleyball", "Basketball", "Handball"],
+        "material": ["Synthetic Leather", "Plastic", "Nylon"],
+        "size": ["Standard", "Small", "Large"],
+        "color": ["White", "Black", "Red", "Blue", "Silver"],
+        "brand": ["Nike", "Puma", "Molten", "Wagner"],
+        "stitching_type": ["Hand-stitched", "Machine-stitched"]
+      }
+    },
+    "دستگاه‌های ورزشی": {
+      "fa": {
+        "نوع": ["تردمیل", "دوچرخه ثابت", "الپتیکال", "قفسه وزنه"],
+        "قدرت موتور": ["1.5 اسب بخار", "2 اسب بخار", "3 اسب بخار"],
+        "حداکثر سرعت": ["10 کیلومتر", "15 کیلومتر", "20 کیلومتر"],
+        "برند": ["پرفورمر", "جکسون", "کاسیو"],
+        "ویژگی‌های خاص": ["صفحه نمایش لمسی", "برنامه‌های تمرینی پیشرفته", "قابلیت تاشو"]
+      },
+      "en": {
+        "type": ["Treadmill", "Stationary Bike", "Elliptical", "Weight Rack"],
+        "motor_power": ["1.5 HP", "2 HP", "3 HP"],
+        "max_speed": ["10 km/h", "15 km/h", "20 km/h"],
+        "brand": ["ProForm", "Jackson", "Casio"],
+        "special_features": ["Touchscreen", "Advanced Workout Programs", "Foldable"]
+      }
+    }
+  }
+}

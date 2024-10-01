@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 from order.models import Order
-from vendors.models import Vendor, VendorProduct
+from vendors.models import Vendor
 
 CustomUser = get_user_model()
 

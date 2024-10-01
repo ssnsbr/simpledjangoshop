@@ -3,7 +3,8 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 from accounts.models import UserAddress
-from vendors.models import Vendor, VendorProduct
+from vendor_products.models import VendorProduct
+from vendors.models import Vendor
 
 CustomUser = get_user_model()
 
@@ -73,7 +74,7 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return str(self.id)
-
+    @property
     def get_cost(self):
         return self.price * self.quantity
 
@@ -88,10 +89,12 @@ class OrderTracking(models.Model):
     )
     # Existing fields...
     STATUS_CHOICES = [
-        ("Pending", "Pending"),
+        ("Pending", "Pending"), 
         ("Paid", "Paid"),
         ("Canceled", "Canceled"),
         ("Shipped", "Shipped"),
+        ("Out for delivery", "Out for delivery"),
+        ("Delivered", "Delivered"),
     ]
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Pending")
     updated_at = models.DateTimeField(auto_now=True)

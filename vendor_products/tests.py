@@ -5,11 +5,12 @@ from rest_framework.test import APITestCase, APIClient
 from django.urls import reverse
 from rest_framework import status
 from django.contrib.auth import get_user_model
-from ..models import Vendor, VendorProduct
 from products.models import Product, ProductMedia
 from faker import Faker
 import uuid
 from definitions import ROOT_DIR
+from vendor_products.models import VendorProduct
+from vendors.models import Vendor
 
 fake = Faker()
 User = get_user_model()
