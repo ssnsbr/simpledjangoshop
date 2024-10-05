@@ -18,9 +18,10 @@ urlpatterns = [
     path("api/cart/", include("cart.urls")),
     path("api/", include("products.urls")),
     path("api/vendors/", include("vendors.urls")),
-    path("api/vendor-product/", include("vendor_products.urls")),
+    path("api/", include("vendor_products.urls")),
     path("api/orders/", include("order.urls")),
-    path("api/payments/", include("payment.urls")),
+    path("api/payment/", include("payment.urls")),
+    path("api/checkout/", include("checkout.urls")),
     path("api/", include("search.urls")),
     # path("accounts/", include("django.contrib.auth.urls")), 
     path("api/dj-rest-auth/", include("dj_rest_auth.urls")),
@@ -39,4 +40,5 @@ urlpatterns = [
         SpectacularSwaggerView.as_view(url_name="schema"),
         name="swagger-ui",
     ),
+
 ]

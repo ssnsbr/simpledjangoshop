@@ -1,11 +1,10 @@
 from django.urls import include, path
-from .views import PaymentViewsets
+from .views import go_to_gateway_view, callback_gateway_view
+from azbankgateways.urls import az_bank_gateways_urls
 
-from rest_framework.routers import SimpleRouter
-
-router = SimpleRouter()
-router.register("", PaymentViewsets, basename="payment")
 
 urlpatterns = [
-    path("", include(router.urls)),
+    path("bankgateways/", az_bank_gateways_urls()),
+    path("go-to-gateway/", go_to_gateway_view),
+    path("callback-gateway/", callback_gateway_view, name="callback-gateway"),
 ]

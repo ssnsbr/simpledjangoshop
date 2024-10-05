@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from .logging_config import LOGGING
-
+from .bank_config import AZ_IRANIAN_BANK_GATEWAYS
 from datetime import timedelta
 import os
 from pathlib import Path
@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "dj_rest_auth.registration",
     "drf_spectacular",
+    "azbankgateways",
     # "core.apps.CoreConfig",
     "core",
     "vendors.apps.VendorsConfig",
@@ -71,9 +72,12 @@ INSTALLED_APPS = [
     "order.apps.OrderConfig",
     "payment.apps.PaymentConfig",
     "search.apps.SearchConfig",
+    "checkout",
+    # "django_faker",
 ]
 LOG_PATH = os.path.join(BASE_DIR, "log/")
-
+# FAKER_LOCALE = None  # settings.LANGUAGE_CODE is loaded
+# FAKER_PROVIDERS = None  # faker.DEFAULT_PROVIDERS is loaded (all)
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
@@ -237,3 +241,8 @@ AUTHENTICATION_BACKENDS = (
     # `allauth` specific authentication methods, such as login by e-mail
     "allauth.account.auth_backends.AuthenticationBackend",
 )
+
+
+#az-iranian-bank-gateways https://stackoverflow.com/questions/62047354/build-absolute-uri-with-https-behind-reverse-proxy/65934202#65934202
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
