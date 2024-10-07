@@ -1,9 +1,18 @@
 from typing import Any, Dict
+from uuid import UUID
 from rest_framework import serializers
 from drf_spectacular.utils import extend_schema_field
 
 from products.serializers import ProductMediaSerialiser
 from vendor_products.models import VendorProduct
+
+
+def is_valid_uuid(uuid_to_test, version=4):
+    try:
+        uuid_obj = UUID(uuid_to_test, version=version)
+    except ValueError:
+        return False
+    return str(uuid_obj) == uuid_to_test
 
 
 class VendorProductSerializer(serializers.ModelSerializer):
@@ -29,6 +38,20 @@ class VendorProductSerializer(serializers.ModelSerializer):
         # print("vendor_name: obj:",obj)
         # data = VendorSerializer(obj.store_name()).data
         return obj.product.name
+
+    def validate_price(self, value):
+        """
+        Check that the price is a valid float and not less than zero.
+        """
+        if value is None:
+            raise serializers.ValidationError("Price is required.")
+        if not isinstance(value, float):
+            raise serializers.ValidationError("Price must be a float.")
+        if value < 0:
+            raise serializers.ValidationError(
+                "Price must be greater than or equal to 0."
+            )
+        return value
 
     class Meta:
         model = VendorProduct

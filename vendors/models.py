@@ -1,7 +1,6 @@
 from django.db import models
 import uuid
 from products.models import Product, validate_image
-from simple import settings
 from django.contrib.auth import get_user_model
 
 
@@ -55,6 +54,7 @@ class VendorDiscount(models.Model):
 
 
 class VendorProfile(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     vendor = models.OneToOneField(
         Vendor, on_delete=models.CASCADE, related_name="profile"
     )

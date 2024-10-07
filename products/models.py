@@ -85,9 +85,7 @@ class Product(models.Model):
 
     def first_image(self):
         all_media = self.media.all()
-        # images = [media for media in all_media if media.type == ProductMedia.image]
-        print(str(all_media[0]))
-        return all_media[0] if all_media else None  #'/static/img/default_product.png'
+        return all_media[0] if all_media else None  #TODO '/static/img/default_product.png'
 
 
 def validate_image(image):

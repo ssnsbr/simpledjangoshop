@@ -72,7 +72,6 @@ INSTALLED_APPS = [
     "order.apps.OrderConfig",
     "payment.apps.PaymentConfig",
     "search.apps.SearchConfig",
-    "checkout",
     # "django_faker",
 ]
 LOG_PATH = os.path.join(BASE_DIR, "log/")

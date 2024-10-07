@@ -4,8 +4,6 @@ from django.db import models
 from products.models import Product
 from vendors.models import Vendor, VendorDiscount
 
-
-# VendorProduct model to handle the many-to-many relationship and additional details
 class VendorProduct(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     product = models.ForeignKey(

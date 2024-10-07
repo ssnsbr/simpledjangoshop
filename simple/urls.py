@@ -21,7 +21,6 @@ urlpatterns = [
     path("api/", include("vendor_products.urls")),
     path("api/orders/", include("order.urls")),
     path("api/payment/", include("payment.urls")),
-    path("api/checkout/", include("checkout.urls")),
     path("api/", include("search.urls")),
     # path("accounts/", include("django.contrib.auth.urls")), 
     path("api/dj-rest-auth/", include("dj_rest_auth.urls")),

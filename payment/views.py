@@ -8,6 +8,23 @@ from azbankgateways import (
 )
 from azbankgateways.exceptions import AZBankGatewaysException
 from django.http import HttpResponse, Http404
+from django.shortcuts import render
+from django.shortcuts import render
+
+from rest_framework import viewsets
+
+from .models import VendorPayment
+from .serializers import VendorPaymentSerializer
+
+from rest_framework import viewsets, generics
+from rest_framework.decorators import action
+from rest_framework import renderers
+from django.db.models import Q
+
+
+class PaymentViewsets(viewsets.ModelViewSet):
+    queryset = VendorPayment.objects.all()
+    serializer_class = VendorPaymentSerializer
 
 
 def go_to_gateway_view(request):
@@ -17,7 +34,7 @@ def go_to_gateway_view(request):
     user_mobile_number = "+989112221234"  # اختیاری
 
     factory = bankfactories.BankFactory()
-    print(100*"*-*")
+    print(100 * "*-*")
     print("callback-gateway:", reverse("callback-gateway"))
 
     try:
