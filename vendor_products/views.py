@@ -1,8 +1,10 @@
+from django.http import Http404, HttpResponseBadRequest, JsonResponse
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from vendor_products.models import VendorProduct
 from vendor_products.permissions import IsOwnerOrReadOnly, IsVendorOwner
-from vendor_products.serializers import VendorProductSerializer
+from vendor_products.serializers import VendorProductSerializer, is_valid_uuid
+from rest_framework import status
 
 
 class VendorProductViewSet(viewsets.ModelViewSet):
@@ -24,9 +26,16 @@ class VendorProductViewSet(viewsets.ModelViewSet):
         queryset = VendorProduct.objects.all()
 
         if product_id:
-            queryset = queryset.filter(product_id=product_id)
+            if is_valid_uuid(product_id):
+                queryset = queryset.filter(product_id=product_id)
+            else:
+                raise Http404({"detail": f"Invalid UUID: {product_id}"})
+
         if vendor_id:
-            queryset = queryset.filter(vendor_id=vendor_id)
+            if is_valid_uuid(vendor_id):
+                queryset = queryset.filter(vendor_id=vendor_id)
+            else:
+                raise Http404({"detail": f"Invalid UUID: {vendor_id}"})
 
         return queryset
 
@@ -34,7 +43,11 @@ class VendorProductViewSet(viewsets.ModelViewSet):
         """
         Retrieves the object by primary key (pk) from the filtered queryset.
         """
-        return get_object_or_404(self.get_queryset(), pk=self.kwargs.get("pk"))
+        pk = self.kwargs.get("pk")
+        if is_valid_uuid(pk):
+            return get_object_or_404(self.get_queryset(), pk=pk)
+        else:
+            raise Http404({"detail": f"Invalid UUID: {pk}"})
 
     def update(self, request, *args, **kwargs):
         """

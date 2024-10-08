@@ -28,10 +28,13 @@ class TestUtils:
     @staticmethod
     def create_product():
         product = Product.objects.create(name=fake.random_company_product())
-        product_media = ProductMedia.objects.create(
-            product=product,
-            image="path/to/image_" + str(fake.random_number(5)) + ".jpg",
-        )
+        product_media_list = []
+        for i in range(fake.random_int(min=1, max=6)):
+            product_media = ProductMedia.objects.create(
+                product=product,
+                image="path/to/image_" + str(fake.random_number(5)) + ".jpg",
+            )
+            product_media_list.append(product_media)
         return product
 
     @staticmethod

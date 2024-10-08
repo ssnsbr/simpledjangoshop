@@ -1,3 +1,4 @@
+from decimal import Decimal
 from typing import Any, Dict
 from uuid import UUID
 from rest_framework import serializers
@@ -38,15 +39,30 @@ class VendorProductSerializer(serializers.ModelSerializer):
         # print("vendor_name: obj:",obj)
         # data = VendorSerializer(obj.store_name()).data
         return obj.product.name
+    
+    def validate_uuid(self, value):
+        print("UUID")
+        if is_valid_uuid(value):
+            return value
+        else:
+            raise serializers.ValidationError(str(value) + " is not a valid UUID..")
+
+    def validate_id(self, value):
+        if is_valid_uuid(value):
+            return value
+        else:
+            raise serializers.ValidationError(str(value) + " is not a valid UUID..")
 
     def validate_price(self, value):
         """
-        Check that the price is a valid float and not less than zero.
+        Check that the price is a valid Decimal and not less than zero.
         """
         if value is None:
             raise serializers.ValidationError("Price is required.")
-        if not isinstance(value, float):
-            raise serializers.ValidationError("Price must be a float.")
+        if not isinstance(value, Decimal):
+            raise serializers.ValidationError(
+                "Price must be a Decimal, not " + value.__class__.__name__
+            )
         if value < 0:
             raise serializers.ValidationError(
                 "Price must be greater than or equal to 0."
