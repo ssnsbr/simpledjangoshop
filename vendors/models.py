@@ -16,6 +16,10 @@ class Vendor(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     average_rating = models.DecimalField(max_digits=3, decimal_places=2, default=0.00)
+    social_links = models.JSONField(blank=True, null=True)
+    logo = models.ImageField(
+        upload_to="products", validators=[validate_image], blank=True, null=True
+    )
 
     def update_average_rating(self):
         ratings = self.ratings.all()
@@ -39,30 +43,14 @@ class Vendor(models.Model):
 
 class VendorDiscount(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-
     name = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
     description = models.TextField()
     discount_percentage = models.DecimalField(max_digits=10, decimal_places=2)
     available = models.BooleanField(default=False)
-    logo = models.ImageField(
-        upload_to="products", validators=[validate_image], blank=True, null=True
-    )
 
     def __str__(self):
         return f"{self.vendor.name} - {self.discount_percentage}"
-
-
-class VendorProfile(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    vendor = models.OneToOneField(
-        Vendor, on_delete=models.CASCADE, related_name="profile"
-    )
-    contact_number = models.CharField(max_length=20)
-    social_links = models.JSONField(blank=True, null=True)
-
-    def __str__(self):
-        return f"{self.vendor.store_name} - Profile"
 
 
 class VendorRating(models.Model):

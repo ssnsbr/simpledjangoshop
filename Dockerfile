@@ -1,13 +1,6 @@
-FROM python:3.10
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-COPY . .
-EXPOSE 8000
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
 # # Pull base image
 # FROM python:3.10.6
+FROM python:3.10
 
 # # Set environment variables
 # # disables an automatic check for pip updates each time
@@ -17,12 +10,22 @@ CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 # # ensures our console output is not buffered by Docker
 # ENV PYTHONUNBUFFERED 1
 
+
 # # Set work directory
-# WORKDIR /code
+WORKDIR /app
+
 
 # # Install dependencies
-# COPY ./requirements.txt .
-# RUN pip install -r requirements.txt
+COPY requirements.txt .
+RUN pip3 install -r requirements.txt
+
 
 # # Copy project
-# COPY . .
+COPY . .
+
+# # Collect static files for the Django application
+# RUN python manage.py collectstatic --noinput
+
+EXPOSE 8000
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
